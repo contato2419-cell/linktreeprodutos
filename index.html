@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos Testados e Aprovados</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --bg-gradient-start: #0f172a;
+            --bg-gradient-end: #1e1b4b;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+            --text-muted: #cbd5e1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+            color: var(--text-main);
+        }
+
+        .profile-container {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), #ec4899);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2.5rem;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .profile-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-bio {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            max-width: 400px;
+        }
+
+        .links-container {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .product-link {
+            display: flex;
+            align-items: center;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1rem;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+            transform: translateX(-100%);
+            transition: 0.5s;
+        }
+
+        .product-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .product-link:hover::before {
+            transform: translateX(100%);
+        }
+
+        .product-image-container {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-right: 1.25rem;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .product-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product-link:hover .product-image-container img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .product-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.25rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-arrow {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-left: 1rem;
+            transition: 0.3s;
+        }
+
+        .product-arrow svg {
+            width: 16px;
+            height: 16px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .product-link:hover .product-arrow {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Background animated blobs */
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+            animation: moveBlob 20s infinite alternate;
+        }
+        
+        .blob-1 {
+            top: -10%; left: -10%;
+            width: 300px; height: 300px;
+            background: #6366f1;
+            border-radius: 50%;
+        }
+
+        .blob-2 {
+            bottom: -10%; right: -10%;
+            width: 350px; height: 350px;
+            background: #ec4899;
+            border-radius: 50%;
+            animation-delay: -5s;
+        }
+
+        @keyframes moveBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 50px) scale(1.2); }
+        }
+
+        @media (max-width: 480px) {
+            .product-image-container {
+                width: 70px;
+                height: 70px;
+                margin-right: 1rem;
+            }
+            .product-title {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Elements -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <div class="profile-container">
+        <div class="profile-pic">⭐</div>
+        <h1 class="profile-title">Produtos Testados</h1>
+        <p class="profile-bio">As melhores recomendações, aprovadas por mim.</p>
+    </div>
+
+    <div class="links-container">
+        
+        <!-- Produto 1 -->
+        <a href="https://vt.tiktok.com/ZS9DFKSNmGnmE-7yMB6/" target="_blank" rel="noopener noreferrer" class="product-link">
+            <div class="product-image-container">
+                <img src="chair.jpg" alt="Cadeira Ergonômica Mesh">
+            </div>
+            <div class="product-info">
+                <div class="product-title">Cadeira Ergonômica com Mesh Respirável e Apoio Ajustável</div>
+            </div>
+            <div class="product-arrow">
+                <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+        </a>
+
+        <!-- Produto 2 -->
+        <a href="https://vt.tiktok.com/ZS9DFKyjcmV4W-ku5HE/" target="_blank" rel="noopener noreferrer" class="product-link">
+            <div class="product-image-container">
+                <img src="mousepad.jpg" alt="Mouse Pad Gamer Dollar">
+            </div>
+            <div class="product-info">
+                <div class="product-title">Mouse Pad Gamer Profissional Antiderrapante (Estampa Dollar)</div>
+            </div>
+            <div class="product-arrow">
+                <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+        </a>
+
+    </div>
+</body>
+</html>
